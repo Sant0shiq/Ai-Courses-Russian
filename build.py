@@ -10,6 +10,8 @@ ORDER = [
  ("genai-everyone","a-genai-everyone","basics","Generative AI for Everyone","Курс Эндрю Ына о генеративном ИИ: возможности LLM, RAG, дообучение, влияние на работу."),
  ("google-genai","b-google-genai","basics","Google: Introduction to Generative AI","Учебный путь Google: генеративный ИИ, большие языковые модели и ответственный ИИ."),
  ("claude-code","3-claude-code","build","Claude Code 101","Агентное программирование: установка, CLAUDE.md, режим планирования, скиллы, MCP."),
+ ("claude-code-action","c-claude-code-action","build","Claude Code in Action","Продолжение Claude Code 101: длинные сессии, проверка, разрешения, хуки, автоматизация, плагины."),
+ ("subagents","d-subagents","build","Введение в субагентов","Как делегировать работу помощникам с отдельным контекстом и проектировать их надёжно."),
  ("agent-skills","4-skills","build","Agent Skills","Как упаковать свой рабочий процесс в навык для Claude."),
  ("mcp","5-mcp","build","Введение в MCP","Открытый стандарт подключения ИИ к сервисам и данным."),
  ("platform","6-platform","dev","Claude Platform 101","Консоль, ключи, первый запрос к API, выбор модели, стоимость, ошибки."),
