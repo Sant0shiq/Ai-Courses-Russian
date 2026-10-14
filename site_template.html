@@ -1,0 +1,280 @@
+<title>ИИ-курсы на русском</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: одна страница — главная библиотека с треками курсов; курс открывается на месте: оглавление слева, урок справа, сертификат как бланк */
+:root{
+  --bg:#EEF1F4; --paper:#FFFFFF; --ink:#18202B; --muted:#5B6676; --line:#D6DCE4;
+  --accent:#2747C9; --accent-soft:#E3E8FB; --seal:#C48A1C; --ok:#1E7A4C; --ok-soft:#DFF2E7; --bad:#B4362E; --bad-soft:#F8E1DF;
+  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10141B; --paper:#171D27; --ink:#E6EAF0; --muted:#97A2B3; --line:#2A3342;
+  --accent:#8EA4FF; --accent-soft:#1E2846; --seal:#E2B04F; --ok:#5CC892; --ok-soft:#163327; --bad:#F08A80; --bad-soft:#3A1E1C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10141B; --paper:#171D27; --ink:#E6EAF0; --muted:#97A2B3; --line:#2A3342;
+  --accent:#8EA4FF; --accent-soft:#1E2846; --seal:#E2B04F; --ok:#5CC892; --ok-soft:#163327; --bad:#F08A80; --bad-soft:#3A1E1C; color-scheme:dark}
+
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 60px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,4vw,42px);line-height:1.1;margin:6px 0 8px;text-wrap:balance}
+h1 span{color:var(--accent)}
+.lead{max-width:66ch;margin:0;color:var(--muted)}
+a{color:var(--accent)}
+
+/* home */
+.home{display:flex;flex-direction:column;gap:40px}
+.stats{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:14px;font-family:var(--f-mono);font-size:13px;font-variant-numeric:tabular-nums}
+.stats b{color:var(--accent);font-weight:500}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:20px}
+.how div{border-top:2px solid var(--accent);padding-top:10px;font-size:14px;color:var(--muted);min-width:0}
+.how b{display:block;color:var(--ink);font-size:15px;margin-bottom:2px}
+section.track h2{font-family:var(--f-display);font-weight:500;font-size:20px;margin:0 0 4px}
+section.track .sub{margin:0 0 16px;color:var(--muted);font-size:14px;max-width:66ch}
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.c{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:8px;padding:18px;border-radius:10px;border:1px solid var(--line);background:var(--paper);min-width:0;color:var(--ink)}
+.c:hover{border-color:var(--accent)}
+.c:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.c.ext{text-decoration:none}
+.c .top{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.pill{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.pill.prov{border:1px solid var(--line);color:var(--muted)}
+.pill.done{background:var(--ok-soft);color:var(--ok)}
+.pill.ru{background:var(--accent-soft);color:var(--accent)}
+.c .len{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.c h3{margin:0;font-size:17px;font-weight:600;line-height:1.3}
+.c p{margin:0;font-size:14px;color:var(--muted)}
+.c .bar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin-top:auto}
+.c .bar i{display:block;height:100%;background:var(--accent)}
+.c .go{font-weight:500;color:var(--accent);font-size:14px;margin-top:auto}
+.foot{font-size:13px;color:var(--muted);max-width:72ch;border-top:1px solid var(--line);padding-top:16px}
+
+/* course */
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px}
+.brand{display:flex;flex-direction:column;gap:4px;min-width:0}
+.back{all:unset;cursor:pointer;font-family:var(--f-mono);font-size:13px;color:var(--accent);margin-bottom:8px}
+.back:hover{text-decoration:underline}
+.back:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a.orig{font-family:var(--f-mono);font-size:12px;text-decoration:none}
+a.orig:hover{text-decoration:underline}
+.progress{min-width:220px;flex:0 1 320px}
+.progress .bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.progress .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+.progress .lbl{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:290px minmax(0,1fr);gap:24px;align-items:start}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);display:flex;flex-direction:column;gap:18px}
+.mod-h{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;justify-content:space-between;gap:8px}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.toc button{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:flex;gap:10px;align-items:baseline;padding:7px 10px;border-radius:6px;font-size:14px;line-height:1.35;color:var(--ink)}
+.toc button:hover{background:var(--accent-soft)}
+.toc button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.toc button[aria-current="true"]{background:var(--accent);color:var(--paper)}
+.toc button .n{font-family:var(--f-mono);font-size:12px;opacity:.7;min-width:28px;font-variant-numeric:tabular-nums}
+.toc button .st{margin-left:auto;font-size:12px}
+.toc button.locked{opacity:.5}
+main.pane{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:clamp(20px,4vw,44px);min-width:0}
+.lesson-meta{font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+main h2{font-family:var(--f-display);font-weight:500;font-size:clamp(22px,3vw,30px);line-height:1.2;margin:0 0 20px;text-wrap:balance}
+main h3{font-size:18px;margin:28px 0 8px;font-weight:600}
+main p,main li{max-width:68ch}
+main ul,main ol.body{padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.note{border-left:3px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 6px 6px 0;margin:18px 0;max-width:68ch}
+.note b{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;color:var(--accent)}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0}
+.cmp div{border:1px solid var(--line);border-radius:8px;padding:14px;min-width:0}
+.cmp .tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.cmp .bad .tag{color:var(--bad)} .cmp .good .tag{color:var(--ok)}
+.cmp pre{white-space:pre-wrap;font-family:var(--f-mono);font-size:13px;line-height:1.5;margin:0}
+table.t{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0}
+.tbl{overflow-x:auto}
+table.t th,table.t td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.t th{font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.task{border:1px dashed var(--accent);border-radius:8px;padding:14px 16px;margin:20px 0;max-width:68ch}
+.task b{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+pre.code{font-family:var(--f-mono);font-size:13px;line-height:1.55;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:14px 0;max-width:100%;white-space:pre}
+main code{font-family:var(--f-mono);font-size:.9em;background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+pre.code code{background:none;border:0;padding:0}
+.quiz{display:flex;flex-direction:column;gap:22px;margin-top:8px}
+.q{border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:0}
+.q .qt{font-weight:600;margin-bottom:10px;padding:0}
+.q label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:6px;cursor:pointer}
+.q label:hover{background:var(--accent-soft)}
+.q input{margin-top:5px;accent-color:var(--accent)}
+.q.right{border-color:var(--ok);background:var(--ok-soft)}
+.q.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.q .ex{margin-top:8px;font-size:14px;color:var(--muted)}
+.result{font-family:var(--f-mono);font-size:14px;padding:12px 16px;border-radius:8px}
+.result.pass{background:var(--ok-soft);color:var(--ok)} .result.fail{background:var(--bad-soft);color:var(--bad)}
+.nav-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+.btn{font:inherit;font-weight:500;cursor:pointer;border-radius:8px;padding:10px 18px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cert-form{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0 24px}
+.cert-form input{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);flex:1 1 240px;min-width:0}
+.cert{position:relative;background:var(--paper);color:var(--ink);border:2px solid var(--ink);padding:10px;max-width:820px}
+.cert-in{border:1px solid var(--ink);padding:clamp(22px,5vw,52px);display:flex;flex-direction:column;gap:14px;background:repeating-linear-gradient(135deg,transparent 0 14px,var(--accent-soft) 14px 15px)}
+.cert-in>*{position:relative}
+.cert .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.cert .ttl{font-family:var(--f-display);font-weight:700;font-size:clamp(22px,4.2vw,40px);line-height:1.08;padding-right:clamp(70px,14vw,120px)}
+.cert .who{font-family:var(--f-display);font-weight:500;font-size:clamp(20px,3.6vw,32px);color:var(--accent);border-bottom:1px solid var(--ink);padding-bottom:6px;overflow-wrap:anywhere}
+.cert .row{display:flex;flex-wrap:wrap;gap:24px 40px;margin-top:10px;font-variant-numeric:tabular-nums}
+.cert .row div{display:flex;flex-direction:column;gap:2px}
+.cert .row span:last-child{font-family:var(--f-mono);font-size:15px}
+.seal{position:absolute;right:clamp(16px,4vw,40px);top:clamp(16px,4vw,40px);width:clamp(70px,13vw,112px);height:auto}
+.disc{font-size:12px;color:var(--muted);margin-top:8px;max-width:72ch}
+@media (max-width:860px){
+  .grid{grid-template-columns:minmax(0,1fr)}
+  nav.toc{position:static;flex-direction:row;overflow-x:auto;gap:12px;padding-bottom:6px}
+  nav.toc section{flex:0 0 250px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script>
+{{DATA}}
+</script>
+<script>
+const PASS_MOD=2/3, PASS_FINAL=0.8, KEY="ailib-ru-v1";
+let ST={courses:{},name:""};
+try{const r=localStorage.getItem(KEY); if(r) ST=Object.assign(ST,JSON.parse(r));}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const byId=Object.fromEntries(CATALOG.map(c=>[c.id,c]));
+const app=document.getElementById("app");
+
+function cs(id){return ST.courses[id]||(ST.courses[id]={done:{},scores:{},final:null,cur:null});}
+function steps(c){
+ if(c._steps)return c._steps; const S=[];
+ c.COURSE.forEach((m,mi)=>{m.lessons.forEach(l=>S.push({type:"lesson",id:l.id,mod:m,l,label:l.title,n:l.id}));
+  S.push({type:"quiz",id:m.id+"-q",mod:m,label:"Тест модуля",n:(mi+1)+".T"});});
+ S.push({type:"final",id:"final",label:"Итоговый экзамен",n:"Э"});
+ S.push({type:"cert",id:"cert",label:"Сертификат",n:"★"});
+ return c._steps=S;
+}
+function isDone(c,s){const st=cs(c.id); if(s.type==="lesson")return !!st.done[s.id]; if(s.type==="quiz")return (st.scores[s.id]||0)>=PASS_MOD; if(s.type==="final")return st.final!=null&&st.final>=PASS_FINAL; return false;}
+function locked(c,s){const st=cs(c.id); if(s.type==="final")return !c.COURSE.every(m=>(st.scores[m.id+"-q"]||0)>=PASS_MOD); if(s.type==="cert")return !(st.final>=PASS_FINAL); return false;}
+function pct(c){const L=steps(c).filter(s=>s.type!=="cert"); return Math.round(100*L.filter(s=>isDone(c,s)).length/L.length);}
+
+/* ---------- home ---------- */
+function home(){
+ document.title="ИИ-курсы на русском";
+ const prepCount=CATALOG.length, lessons=CATALOG.reduce((n,c)=>n+c.COURSE.reduce((k,m)=>k+m.lessons.length,0),0), certs=CATALOG.filter(c=>cs(c.id).final>=PASS_FINAL).length;
+ const trackHTML=TRACKS.map(tr=>{
+  const items=CATALOG.filter(c=>c.track===tr.id);
+  return `<section class="track"><h2>${tr.t}</h2><p class="sub">${tr.s}</p><div class="shelf">${items.map(c=>{
+   const p=pct(c), done=cs(c.id).final>=PASS_FINAL;
+   const nl=c.COURSE.reduce((k,m)=>k+m.lessons.length,0);
+   return `<button class="c" data-open="${c.id}"><div class="top"><span class="pill ${done?"done":"prov"}">${done?"Сертификат ✓":esc(c.meta.PROVIDER)}</span><span class="len">${c.COURSE.length} мод. · ${nl} ур.</span></div><h3>${c.name}</h3><p>${esc(c.desc)}</p><div class="bar" aria-label="Пройдено ${p}%"><i style="width:${p}%"></i></div></button>`;}).join("")}</div></section>`;}).join("");
+ const linkHTML=`<section class="track"><h2>Уже есть на русском</h2><p class="sub">У этих бесплатных курсов есть официальная или поддерживаемая автором русская версия. Ссылки ведут прямо на неё.</p><div class="shelf">${LINKS.map(l=>`<a class="c ext" href="${l.url}" target="_blank" rel="noopener"><div class="top"><span class="pill ru">${esc(l.ru)}</span><span class="len">${esc(l.len)}</span></div><h3>${esc(l.name)}</h3><p>${esc(l.desc)}</p><span class="go">${esc(l.prov)} · открыть ↗</span></a>`).join("")}</div></section>`;
+ app.innerHTML=`<div class="home">
+ <header>
+  <div class="eyebrow">Подготовка к официальным курсам по ИИ · для тех, кто не знает английский</div>
+  <h1>ИИ-курсы <span>на русском</span></h1>
+  <p class="lead">Бесплатные курсы Anthropic, Google, DeepLearning.AI и Хельсинкского университета, пересказанные по их программам на русском. Пройдите курс здесь, сдайте тесты, а потом идите на официальный курс: термины и идеи уже будут знакомы.</p>
+  <div class="stats"><span>Курсов здесь: <b>${prepCount}</b></span><span>Уроков: <b>${lessons}</b></span><span>Русских ссылок: <b>${LINKS.length}</b></span><span>Ваших сертификатов: <b>${certs}</b></span></div>
+  <div class="how"><div><b>1. Уроки на русском</b>Короткие уроки по программе оригинального курса с примерами.</div><div><b>2. Тесты и экзамен</b>Тест после каждого модуля и итоговый экзамен от 80%.</div><div><b>3. Официальный курс</b>Ссылка на оригинал есть в каждом курсе. Там вы получите официальный сертификат.</div></div>
+ </header>
+ ${trackHTML}
+ ${linkHTML}
+ <p class="foot">Уроки написаны заново на русском по открытым программам курсов и не являются официальными курсами или переводами Anthropic, Google, DeepLearning.AI, Хельсинкского университета или других компаний. Сертификаты на этой странице учебные. Официальные сертификаты выдаются только на сайтах оригинальных курсов. Прогресс хранится в вашем браузере.</p>
+ </div>`;
+ app.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openCourse(b.dataset.open));
+}
+
+/* ---------- course ---------- */
+let C=null;
+function openCourse(id){ if(!byId[id])return home(); C=byId[id]; const st=cs(id); if(!st.cur||!steps(C).find(s=>s.id===st.cur))st.cur=steps(C)[0].id; save();
+ try{if(location.hash!=="#"+id)history.replaceState(null,"","#"+id);}catch(e){}
+ shell(); render(); window.scrollTo(0,0);}
+function goHome(){C=null; try{history.replaceState(null,"",location.pathname+location.search);}catch(e){} home(); window.scrollTo(0,0);}
+function shell(){
+ document.title=C.meta.TITLE;
+ app.innerHTML=`<header class="top"><div class="brand"><button class="back" id="bback">← Все курсы</button><div class="eyebrow">${C.meta.EYEBROW}</div><h1>${C.meta.H1}</h1><a class="orig" href="${C.meta.OFFICIAL}" target="_blank" rel="noopener">Официальный курс «${C.meta.ORIG}» на английском ↗</a></div>
+ <div class="progress" aria-label="Прогресс курса"><div class="bar"><i id="pbar"></i></div><div class="lbl"><span id="plbl"></span><span id="ppct"></span></div></div></header>
+ <div class="grid"><nav class="toc" id="toc" aria-label="Содержание курса"></nav><main class="pane" id="pane" tabindex="-1"></main></div>`;
+ document.getElementById("bback").onclick=goHome;
+}
+function renderTOC(){
+ const st=cs(C.id), S=steps(C), toc=document.getElementById("toc"); toc.innerHTML="";
+ const groups=[...C.COURSE.map((m,i)=>({h:`Модуль ${i+1} · ${m.title}`,steps:S.filter(s=>s.mod===m)})),{h:"Финал",steps:S.filter(s=>!s.mod)}];
+ groups.forEach(g=>{
+  const sec=document.createElement("section");
+  const done=g.steps.filter(s=>isDone(C,s)).length, tot=g.steps.filter(s=>s.type!=="cert").length;
+  sec.innerHTML=`<div class="mod-h"><span>${g.h}</span>${tot?`<span>${done}/${tot}</span>`:""}</div>`;
+  const ol=document.createElement("ol");
+  g.steps.forEach(s=>{const li=document.createElement("li"), b=document.createElement("button"), lk=locked(C,s);
+   b.className=lk?"locked":""; b.setAttribute("aria-current",st.cur===s.id?"true":"false");
+   b.innerHTML=`<span class="n">${s.n}</span><span>${s.label}</span><span class="st">${isDone(C,s)?"✓":lk?"🔒":""}</span>`;
+   b.onclick=()=>go(s.id); li.appendChild(b); ol.appendChild(li);});
+  sec.appendChild(ol); toc.appendChild(sec);});
+ const L=S.filter(s=>s.type!=="cert"), d=L.filter(s=>isDone(C,s)).length;
+ document.getElementById("pbar").style.width=(100*d/L.length)+"%";
+ document.getElementById("plbl").textContent=`${d} из ${L.length} шагов`;
+ document.getElementById("ppct").textContent=Math.round(100*d/L.length)+"%";
+}
+function go(id){cs(C.id).cur=id; save(); render(); const p=document.getElementById("pane"); p.focus({preventScroll:true}); if(window.innerWidth<860)p.scrollIntoView({behavior:"smooth"}); else window.scrollTo({top:0,behavior:"smooth"});}
+function navRow(idx,canNext){const S=steps(C), prev=S[idx-1], next=S[idx+1];
+ return `<div class="nav-row"><button class="btn" id="bprev" ${prev?"":"disabled"}>← ${prev?prev.label:"Назад"}</button>${next?`<button class="btn primary" id="bnext" ${canNext?"":"disabled"}>${next.label} →</button>`:`<button class="btn primary" id="bhome">К библиотеке →</button>`}</div>`;}
+function bindNav(idx){const S=steps(C), p=document.getElementById("bprev"), n=document.getElementById("bnext"), h=document.getElementById("bhome");
+ if(p&&S[idx-1])p.onclick=()=>go(S[idx-1].id); if(n)n.onclick=()=>go(S[idx+1].id); if(h)h.onclick=goHome;}
+function shuf(x){for(let i=x.length-1;i>0;i--){const k=Math.floor(Math.random()*(i+1));[x[i],x[k]]=[x[k],x[i]];}return x;}
+function quizHTML(qs,prefix){
+ return `<form class="quiz" id="qf">${qs.map((q,i)=>`<fieldset class="q" id="${prefix}${i}"><legend class="qt">${i+1}. ${q.q}</legend>${shuf(q.a.map((a,j)=>[a,j])).map(([a,j])=>`<label><input type="radio" name="${prefix}${i}" id="${prefix}${i}_${j}" value="${j}"> <span>${a}</span></label>`).join("")}<div class="ex" hidden></div></fieldset>`).join("")}
+ <div><button class="btn primary" type="submit">Проверить ответы</button></div><div id="qres"></div></form>`;}
+function gradeQuiz(qs,prefix,showEx){let ok=0;
+ qs.forEach((q,i)=>{const fs=document.getElementById(prefix+i), v=fs.querySelector("input:checked"), r=v&&+v.value===q.c; if(r)ok++;
+  fs.classList.remove("right","wrong"); fs.classList.add(r?"right":"wrong");
+  const ex=fs.querySelector(".ex"); if(showEx){ex.hidden=false; ex.textContent=(r?"Верно. ":"Правильный ответ: «"+q.a[q.c]+"». ")+(q.ex||"");}});
+ return ok/qs.length;}
+function render(){
+ renderTOC();
+ const st=cs(C.id), S=steps(C), idx=Math.max(0,S.findIndex(s=>s.id===st.cur)), s=S[idx], pane=document.getElementById("pane"), FINAL=C.FINAL;
+ if(locked(C,s)){pane.innerHTML=`<div class="lesson-meta">${s.label}</div><h2>Пока закрыто</h2><p>${s.type==="final"?"Сначала сдайте тесты всех модулей: минимум 2 правильных ответа из 3 в каждом.":"Сертификат откроется после итогового экзамена с результатом от 80%."}</p>`+navRow(idx,false); bindNav(idx); return;}
+ if(s.type==="lesson"){const mi=C.COURSE.indexOf(s.mod)+1;
+  pane.innerHTML=`<div class="lesson-meta">Модуль ${mi} · Урок ${s.id}</div><h2>${s.l.title}</h2>${s.l.html}`+navRow(idx,true);
+  bindNav(idx); st.done[s.id]=true; save(); renderTOC();
+ } else if(s.type==="quiz"){const mi=C.COURSE.indexOf(s.mod)+1;
+  pane.innerHTML=`<div class="lesson-meta">Модуль ${mi} · Тест</div><h2>Проверка: ${s.mod.title}</h2><p>Три вопроса, у каждого четыре варианта. Чтобы засчитать модуль, нужно ответить верно минимум на два.</p>`+quizHTML(s.mod.quiz,"q")+navRow(idx,isDone(C,s));
+  bindNav(idx);
+  document.getElementById("qf").onsubmit=e=>{e.preventDefault(); const sc=gradeQuiz(s.mod.quiz,"q",true); st.scores[s.id]=Math.max(st.scores[s.id]||0,sc); save();
+   const pass=sc>=PASS_MOD; document.getElementById("qres").innerHTML=`<div class="result ${pass?"pass":"fail"}">${Math.round(sc*3)} из 3 · ${pass?"Модуль засчитан":"Перечитайте уроки модуля и попробуйте снова"}</div>`;
+   const n=document.getElementById("bnext"); if(n)n.disabled=!isDone(C,s); renderTOC();};
+ } else if(s.type==="final"){const need=Math.ceil(FINAL.length*PASS_FINAL);
+  pane.innerHTML=`<div class="lesson-meta">Итоговый экзамен</div><h2>${FINAL.length} вопросов по всему курсу</h2><p>Проходной балл 80%, то есть ${need} правильных ответов. Пояснений к ошибкам здесь нет, только отметка верно или неверно. Порядок вариантов меняется при каждом открытии. Пересдавать можно сколько угодно.</p>`+quizHTML(FINAL,"f")+navRow(idx,isDone(C,s));
+  bindNav(idx);
+  document.getElementById("qf").onsubmit=e=>{e.preventDefault(); const sc=gradeQuiz(FINAL,"f",false); st.final=Math.max(st.final||0,sc);
+   if(sc>=PASS_FINAL&&!st.certId){st.certId=C.meta.PREFIX+"-"+Date.now().toString(36).toUpperCase().slice(-6); st.certDate=new Date().toISOString();} save();
+   const pass=sc>=PASS_FINAL; document.getElementById("qres").innerHTML=`<div class="result ${pass?"pass":"fail"}">${Math.round(sc*FINAL.length)} из ${FINAL.length} · ${pass?"Экзамен сдан. Сертификат открыт":"Нужно "+need+" из "+FINAL.length+". Попробуйте ещё раз"}</div>`;
+   const n=document.getElementById("bnext"); if(n)n.disabled=!isDone(C,s); renderTOC();};
+ } else {
+  const d=st.certDate?new Date(st.certDate):new Date(), ds=d.toLocaleDateString("ru-RU",{day:"2-digit",month:"long",year:"numeric"});
+  const nl=C.COURSE.reduce((n,m)=>n+m.lessons.length,0);
+  pane.innerHTML=`<div class="lesson-meta">Финал</div><h2>Ваш сертификат</h2>
+  <p>Впишите имя так, как оно должно стоять в сертификате. Сохранить его можно скриншотом.</p>
+  <div class="cert-form"><input id="nm" placeholder="Имя и фамилия" value="${esc(ST.name||"")}" maxlength="60" aria-label="Имя для сертификата"></div>
+  <div class="cert"><div class="cert-in">
+   <svg class="seal" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="var(--seal)" stroke-width="2"><circle cx="60" cy="60" r="56"/><circle cx="60" cy="60" r="46" stroke-dasharray="3 4"/></g><circle cx="60" cy="60" r="38" fill="var(--seal)"/><text x="60" y="56" text-anchor="middle" font-family="Unbounded,Arial Black,sans-serif" font-size="${C.meta.SEAL.length>3?16:20}" font-weight="700" fill="var(--paper)">${C.meta.SEAL}</text><text x="60" y="76" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" letter-spacing="2" fill="var(--paper)">ПРОЙДЕН</text></svg>
+   <div class="k">Сертификат о прохождении подготовительного курса</div>
+   <div class="ttl">${C.meta.CERTTTL}</div>
+   <div class="k" style="margin-top:14px">Настоящим подтверждается, что</div>
+   <div class="who" id="who">${esc(ST.name||"Имя Фамилия")}</div>
+   <p style="margin:0;max-width:56ch">освоил(а) курс из ${C.COURSE.length} модулей и ${nl} уроков: ${C.meta.TOPICS}, и сдал(а) итоговый экзамен.</p>
+   <div class="row"><div><span class="k">Дата</span><span>${ds}</span></div><div><span class="k">Результат</span><span>${Math.round((st.final||0)*100)}%</span></div><div><span class="k">Номер</span><span>${st.certId||"—"}</span></div></div>
+  </div></div>
+  <p class="disc">Учебный сертификат подготовительного курса. Уроки написаны на русском по программе курса «${C.meta.ORIG}» (${C.meta.PROVIDER}) и не являются официальным курсом ${C.meta.PROVIDER} или его переводом. Официальный сертификат выдаётся только на <a href="${C.meta.OFFICIAL}" target="_blank" rel="noopener">сайте оригинального курса</a>.</p>`+navRow(idx,false);
+  bindNav(idx);
+  const nm=document.getElementById("nm"); nm.oninput=()=>{ST.name=nm.value.trim(); document.getElementById("who").textContent=ST.name||"Имя Фамилия"; save();};
+ }
+}
+function route(){const h=(location.hash||"").slice(1); if(h&&byId[h])openCourse(h); else home();}
+window.addEventListener("hashchange",route);
+route();
+</script>
