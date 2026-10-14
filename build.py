@@ -9,6 +9,9 @@ ORDER = [
  ("ai-for-everyone","9-ai-for-everyone","basics","AI For Everyone","Курс Эндрю Ына для не-технических специалистов: проекты на ИИ и трансформация компании."),
  ("genai-everyone","a-genai-everyone","basics","Generative AI for Everyone","Курс Эндрю Ына о генеративном ИИ: возможности LLM, RAG, дообучение, влияние на работу."),
  ("google-genai","b-google-genai","basics","Google: Introduction to Generative AI","Учебный путь Google: генеративный ИИ, большие языковые модели и ответственный ИИ."),
+ ("chatgpt-pe","e-chatgpt-pe","prompt","ChatGPT Prompt Engineering for Developers","Короткий курс Эндрю Ына: принципы промптинга, итерации, обобщение, классификация, чат-бот на API."),
+ ("ibm-pe","f-ibm-pe","prompt","Prompt Engineering for Everyone","Курс IBM без программирования: паттерны персоны и интервью, цепочка и дерево рассуждений."),
+ ("aws-pe","g-aws-pe","prompt","Foundations of Prompt Engineering","Курс AWS: техники от few-shot до ReAct, особенности моделей, атаки на промпты, предвзятость."),
  ("claude-code","3-claude-code","build","Claude Code 101","Агентное программирование: установка, CLAUDE.md, режим планирования, скиллы, MCP."),
  ("claude-code-action","c-claude-code-action","build","Claude Code in Action","Продолжение Claude Code 101: длинные сессии, проверка, разрешения, хуки, автоматизация, плагины."),
  ("subagents","d-subagents","build","Введение в субагентов","Как делегировать работу помощникам с отдельным контекстом и проектировать их надёжно."),
@@ -20,6 +23,7 @@ ORDER = [
 TRACKS = [
  {"id":"start","t":"Старт: ИИ в работе с Claude","s":"Курсы Anthropic для всех, без технических знаний. Подходят как подготовка к Claude Academy."},
  {"id":"basics","t":"Основы ИИ","s":"Самые известные бесплатные вводные курсы других организаций. Русской версии у оригиналов нет, поэтому уроки сделаны здесь."},
+ {"id":"prompt","t":"Промпт-инжиниринг","s":"Как писать запросы к моделям: курсы DeepLearning.AI, IBM и AWS. Приёмы общие для Claude, ChatGPT и других моделей."},
  {"id":"build","t":"Создатели","s":"Для тех, кто делает свои приложения и автоматизации, в том числе вайб-кодингом."},
  {"id":"dev","t":"Разработчики","s":"API и платформа для встраивания Claude в свои системы."},
 ]
@@ -28,6 +32,7 @@ LINKS = [
  {"name":"Generative AI for Beginners","prov":"Microsoft","ru":"Русский","len":"21 урок","desc":"Создание приложений на генеративном ИИ: промпты, RAG, агенты, безопасность.","url":"https://github.com/microsoft/generative-ai-for-beginners/blob/main/translations/ru/README.md"},
  {"name":"AI Agents for Beginners","prov":"Microsoft","ru":"Русский","len":"Серия уроков","desc":"Как устроены ИИ-агенты и как их строить: инструменты, планирование, мультиагентные системы.","url":"https://microsoft.github.io/ai-agents-for-beginners/translations/ru/"},
  {"name":"ML for Beginners","prov":"Microsoft","ru":"Русский","len":"12 недель · 26 уроков","desc":"Классическое машинное обучение на Python и scikit-learn с практическими проектами.","url":"https://github.com/microsoft/ML-For-Beginners/blob/main/translations/ru/README.md"},
+ {"name":"Machine Learning Crash Course","prov":"Google","ru":"Русский","len":"Интерактивный курс","desc":"Ускоренный курс машинного обучения: регрессия, классификация, данные, нейросети, эмбеддинги, LLM, ML в продакшене.","url":"https://developers.google.com/machine-learning/crash-course?hl=ru"},
  {"name":"LLM Course","prov":"Hugging Face","ru":"Частично на русском","len":"Технический","desc":"Трансформеры и большие языковые модели. На русский переведена часть глав, остальное на английском.","url":"https://huggingface.co/learn/llm-course/ru/chapter1/1"},
 ]
 
