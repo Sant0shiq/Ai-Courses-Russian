@@ -12,10 +12,14 @@
 | Основы ИИ | Elements of AI | University of Helsinki |
 | Основы ИИ | AI For Everyone, Generative AI for Everyone | DeepLearning.AI |
 | Основы ИИ | Introduction to Generative AI | Google Cloud |
-| Создатели | Claude Code 101, Agent Skills, Введение в MCP | Anthropic · Claude Academy |
+| Промпт-инжиниринг | ChatGPT Prompt Engineering for Developers | DeepLearning.AI |
+| Промпт-инжиниринг | Prompt Engineering for Everyone | IBM Skills Network |
+| Промпт-инжиниринг | Foundations of Prompt Engineering | AWS Skill Builder |
+| Создатели | Claude Code 101, Claude Code in Action, Введение в субагентов, Agent Skills, Введение в MCP | Anthropic · Claude Academy |
+| Создатели | Agentic AI | DeepLearning.AI |
 | Разработчики | Claude Platform 101, Building with the Claude API | Anthropic · Claude Academy |
 
-Ссылки на русские версии: Microsoft AI / Generative AI / AI Agents / ML for Beginners, Hugging Face LLM Course.
+Ссылки на русские версии: Microsoft AI / Generative AI / AI Agents / ML for Beginners, Google Machine Learning Crash Course, Hugging Face LLM Course.
 
 ## Структура
 
@@ -32,7 +36,8 @@ index.html         — готовый сайт (можно открыть в б�
 ## Сборка
 
 ```bash
-python3 build.py
+python3 build.py   # собрать index.html
+node check.js      # открыть каждый шаг каждого курса и проверить тесты
 ```
 
 Порядок курсов, треки и внешние ссылки задаются в начале `build.py` (`ORDER`, `TRACKS`, `LINKS`).
